@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>معرض أثر الفني</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--navy:#0f1c2e;
+--navy2:#1b2b44;
+--cream:#f4f6fb;
+--accent:#7a8fb3;
+--soft:#e6eaf3;
+}
+
+*{
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+font-family:'Cairo', sans-serif;
+background:var(--cream);
+color:var(--navy);
+}
+
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 50px;
+background:white;
+box-shadow:0 3px 15px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo img{
+height:70px;
+transition:.4s;
+}
+
+nav a{
+margin:0 12px;
+text-decoration:none;
+color:var(--navy);
+font-weight:600;
+}
+
+/* HERO */
+/* HERO (واجهة الموقع) */
+.hero{
+min-height:50vh;                 /* بدل height الطويل */
+padding:80px 20px;               /* مساحة داخلية مريحة */
+background:
+linear-gradient(rgba(15,28,46,.85), rgba(15,28,46,.85)),
+url("https://images.unsplash.com/photo-1513351793569-1b0e86f8b6df?auto=format&fit=crop&w=1600&q=80")
+center/cover no-repeat;
+
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+}
+
+.hero-text{
+max-width:600px;                 /* يحد عرض النص */
+margin:auto;
+animation:fade 1.2s ease;
+}
+
+.hero h2{
+font-size:38px;                  /* أصغر وأجمل */
+margin:0 0 10px;
+letter-spacing:.5px;
+}
+
+.hero p{
+font-size:18px;
+opacity:.9;
+margin:0;
+}
+
+
+
+/* CATEGORIES */
+.categories{
+text-align:center;
+padding:35px 10px;
+}
+
+.categories button{
+margin:6px;
+padding:12px 22px;
+border:none;
+background:var(--navy);
+color:white;
+border-radius:30px;
+cursor:pointer;
+}
+
+/* GALLERY */
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+padding:50px;
+}
+
+.art{
+background:white;
+border-radius:14px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.4s;
+}
+
+.art:hover{
+transform:translateY(-8px);
+}
+
+.art img{
+width:100%;
+height: 400px;
+object-fit:cover;
+}
+
+.info{
+padding:18px;
+text-align:center;
+}
+
+.info button{
+background:var(--navy);
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+}
+
+.modal-content{
+background:white;
+margin:8% auto;
+padding:30px;
+width:60%;
+border-radius:12px;
+}
+
+.close{
+float:left;
+font-size:28px;
+cursor:pointer;
+}
+
+.about{
+padding:70px 20px;
+text-align:center;
+background:var(--navy);
+color:white;
+}
+
+footer{
+background:var(--navy);
+color:#cfd6e6;
+text-align:center;
+padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+<img src="image/athar.png">
+</div>
+
+<nav>
+<a href="#">الرئيسية</a>
+<a href="#gallery">اللوحات</a>
+<a href="#about">عن المعرض</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-text">
+<h2>حيث تروي اللوحات حكاياتها…</h2>
+<p>ويولد الأثر في قلب كل من يتأملها</p>
+</div>
+</section>
+
+<section class="categories">
+
+<button onclick="filterSelection('all')">الكل</button>
+
+<button onclick="filterSelection('nature')">طبيعة</button>
+
+<button onclick="filterSelection('human')">إنسانية</button>
+
+<button onclick="filterSelection('historical')">تاريخية</button>
+
+</section>
+
+<section id="gallery" class="gallery">
+<div class="art nature">
+<img src="image/n.jpg">
+<div class="info">
+<h3>ليلة النجوم</h3>
+<p>الفنان: Vincent van Gogh</p>
+
+<button onclick="openModal('الفنان: فنسنت فان غوخ\nالسنة: 1889\nالخامة: زيت على قماش\nالمكان الحالي: متحف الفن الحديث MoMA في نيويورك.\n\nماذا تظهر اللوحة؟\n سماء ليلية مضطربة مليئة بالدوامات والنجوم اللامعة فوق قرية هادئة، مع شجرة سرو داكنة ترتفع في المقدمة. المنظر مستند إلى المشهد من نافذة غرفة فان غوخ في سان ريمي، مع إضافة قرية متخيّلة.\n\nما معناها؟\nاللوحة تعبر عن المشاعر الداخلية لفان غوخ؛ السماء تبدو حية ومتحركة وكأنها تعكس اضطراب الفنان وأمله في الوقت نفسه.')">
+
+قصة اللوحة
+
+</button>
+</div>
+</div>
+
+<div class="art human">
+<img src="image/son.jpg">
+<div class="info">
+<h3>The Son of Man</h3>
+<p>الفنان: René Magritte</p>
+<button onclick="openModal('الفنان: رينيه ماغريت\nالسنة: 1964\nالخامة: زيت على قماش\nالمكان الحالي: مجموعة خاصة وقد أُعيرت أحيانًا للمعارض.\n\nماذا تظهر اللوحة؟\nرجل يرتدي بدلة وقبعة يقف أمام جدار منخفض وخلفه البحر والسماء، لكن وجهه محجوب بتفاحة خضراء معلقة أمامه. تُعد هذه اللوحة من أشهر أعمال ماغريت وتُعتبر من صوره الذاتية الرمزية.\n\nما معناها؟\nالفكرة الأساسية عند ماغريت هي أن ما نراه لا يكشف الحقيقة كاملة. هناك دائمًا شيء ظاهر أمامنا لكنه في الوقت نفسه يمنعنا من رؤية ما وراءه، لذلك تُفسر اللوحة كرمز للهوية المخفية وللفجوة بين المظهر الخارجي والحقيقة الداخلية.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+
+<div class="art historical">
+<img src="image/df.png">
+<div class="info">
+<h3>Relativity</h3>
+<p>الفنان: M. C. Escher</p>
+<button onclick="openModal('الفنان: م. س. إيشر\nالسنة: 1953\nالخامة: طباعة حجرية Lithograph\nالمكان الحالي: العمل معروف ضمن أعمال إيشر الرسمية ويُعرض عبر مؤسسة M.C. Escher.\n\nماذا تظهر اللوحة؟\nمشهد معماري مليء بالسلالم، لكن كل مجموعة من الأشخاص تتحرك وفق جاذبية مختلفة؛ ما يبدو سقفًا عند شخص هو أرض عند آخر. لا يوجد أعلى واحد ثابت في العمل.\n\nما معناها؟\nاللوحة تجعل المشاهد يشعر بأن الواقع نفسه يتغير بحسب زاوية النظر. لذلك تُعد فكرة بصرية عن النسبية والإدراك؛ فليس كل الناس يعيشون العالم بالطريقة نفسها، والحقيقة قد تتبدل بتبدل الموقع والمنظور.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+
+<div class="art human">
+<img src="image/m.jpg">
+<div class="info">
+<h3>Nighthawks</h3>
+<p>الفنان: Edward Hopper</p>
+<button onclick="openModal('الفنان: إدوارد هوبر\nالسنة: 1942\nالخامة: زيت على قماش\nالمكان الحالي: معهد الفنون في شيكاغو.\n\nماذا تظهر اللوحة؟\nمطعمًا ليليًا مضاءً بقوة في شارع شبه خالٍ، يجلس فيه ثلاثة زبائن مع عامل خلف المنضدة. لا يظهر بينهم أي تواصل حقيقي، وكل شخص يبدو غارقًا في عزلته الخاصة.\n\nما معناها؟\nتعد هذه اللوحة من أشهر صور الوحدة في الحياة الحديثة. فهي لا تصوّر أشخاصًا وحيدين فقط، بل تُظهر كيف يمكن للإنسان أن يكون وسط الآخرين ومع ذلك يشعر بالانفصال عنهم نفسيًا. الإضاءة القوية والشارع الفارغ يعززان شعور الصمت والبرود العاطفي.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+
+
+
+<div class="art human">
+<img src="image/z.avif">
+<div class="info">
+<h3>Christina’s World</h3>
+<p>الفنان: Andrew Wyeth</p>
+<button onclick="openModal('الفنان: أندرو وايث\nالسنة: 1948\nالخامة: تمبرا على لوح\nالمكان الحالي: متحف الفن الحديث MoMA في نيويورك.\n\nماذا تظهر اللوحة؟\nامرأة تُرى من الخلف في حقل جاف، تتجه بنظرها وجسدها نحو بيت بعيد أعلى التل. الشخصية هي كريستينا أولسون، وقد اشتهرت القصة المرتبطة بها لأنها كانت تعاني إعاقة حركية وتتنقل على الأرض بطريقة الزحف.\n\nما معناها؟\nقوة اللوحة ليست في الحركة نفسها بل في المسافة؛ فالبيت يبدو قريبًا بصريًا لكنه بعيد جسديًا، وكأن الهدف أمام الإنسان لكنه مؤلم الوصول. لذلك تُفسَّر اللوحة كرمز للإصرار والهشاشة والرغبة في الوصول رغم الألم والعجز.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+
+<div class="art nature">
+<img src="image/g.jpg">
+<div class="info">
+<h3>الموجة العظيمة قبالة كاناغاوا</h3>
+<p>الفنان: Katsushika Hokusai</p>
+
+<button onclick="openModal('الفنان: كاتسوشيكا هوكوساي\nالسنة: حوالي 1831\nالخامة: طباعة خشبية يابانية Ukiyo-e\nالمكان الحالي: توجد نسخ منها في متاحف عديدة مثل المتحف البريطاني.\n\nماذا تظهر اللوحة؟\nتصور موجة بحر ضخمة جدًا تكاد تبتلع قوارب الصيادين بينما يظهر جبل فوجي في الخلفية. شكل الموجة يشبه مخالب هائلة تنقض على القوارب الصغيرة.\n\nما معناها؟\nترمز اللوحة إلى قوة الطبيعة أمام ضعف الإنسان. ورغم أن القوارب تبدو صغيرة أمام الموجة الهائلة إلا أن الصيادين يستمرون في رحلتهم، لذلك تُفهم اللوحة غالبًا كرمز للصمود والشجاعة أمام قوى الطبيعة.')">
+
+قصة اللوحة
+
+</button>
+</div>
+</div>
+
+<div class="art historical">
+<img src="image/a.jpg">
+<div class="info">
+<h3>قسم الإخوة هوراتي</h3>
+<p>الفنان: Jacques-Louis David</p>
+<button onclick="openModal('الفنان: جاك-لويس دافيد\nالسنة: 1784\nالخامة: زيت على قماش\nالمكان الحالي: متحف اللوفر في باريس.\n\nماذا تظهر اللوحة؟\nثلاثة إخوة يمدّون أذرعهم في قسم أمام والدهم الذي يرفع السيوف، بينما تظهر النساء إلى الجانب في حالة حزن وانكسار. التكوين منظم جدًا والأجساد مستقيمة وحازمة في مقابل ليونة وانهيار الجانب النسائي.\n\nما معناها؟\nاللوحة تمثل قيم المدرسة الكلاسيكية الجديدة مثل الواجب والتضحية والانضباط وتقديم مصلحة الوطن على المشاعر الشخصية. لذلك تُعد مثالًا على الفن الذي يستخدم قصص التاريخ القديم لتأكيد القيم الأخلاقية والسياسية.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+
+<div class="art historical">
+<img src="image/th.jpg">
+<div class="info">
+<h3>إصرار الذاكرة</h3>
+<p>الفنان: Salvador Dalí</p>
+<button onclick="openModal('الفنان: سلفادور دالي\nالسنة: 1931\nالخامة: زيت على قماش\nالمكان الحالي: متحف الفن الحديث MoMA في نيويورك.\n\nماذا تظهر اللوحة؟\nمنظر صحراوي أو ساحلي شبه فارغ تتدلّى فيه ساعات رخوة ذائبة فوق غصن وجسم غريب وطاولة. رغم أن اللوحة صغيرة الحجم إلا أنها مليئة بالتفاصيل الدقيقة والجو الحلمي غير المستقر.\n\nما معناها؟\nالساعات الذائبة تهز فكرة الزمن الثابت؛ فهي ترمز إلى أن الوقت ليس صلبًا كما نعتقد بل يتغير حسب شعور الإنسان وإدراكه. لذلك تُفسَّر اللوحة كرمز للزمن النفسي والذاكرة والحلم وانهيار النظام المنطقي المعتاد.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+<div class="art nature">
+<img src="image/rr.webp">
+<div class="info">
+<h3>المتجول فوق بحر الضباب</h3>
+<p>الفنان: Caspar David Friedrich</p>
+<button onclick="openModal('الفنان: كاسبر ديفيد فريدريش\nالسنة: 1818\nالخامة: زيت على قماش\nالمكان الحالي: متحف كونستاله في هامبورغ بألمانيا.\n\nماذا تظهر اللوحة؟\nتُظهر اللوحة رجلًا يقف على قمة صخرة عالية وينظر أمامه إلى منظر طبيعي واسع مليء بالجبال والضباب الكثيف. لا نرى وجه الرجل لأنه يقف وظهره للمشاهد، وكأننا ننظر إلى المشهد من خلال عينيه. الضباب يغطي الوادي بينما تظهر قمم الجبال كأنها جزر وسط بحر من الغيوم.\n\nما معناها؟\nتعبر اللوحة عن التأمل العميق في الطبيعة وفي معنى الحياة. يظهر الإنسان صغيرًا أمام هذا المشهد الطبيعي الهائل، مما يرمز إلى شعور الإنسان بالرهبة أمام عظمة الطبيعة. لذلك تُفسَّر اللوحة أحيانًا على أنها رحلة فكرية يبحث فيها الإنسان عن مكانه في العالم.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+
+<div class="art historical">
+<img src="image/ss.jpg">
+<div class="info">
+<h3>The Fighting Temeraire</h3>
+<p>الفنان: J. M. W. Turner</p>
+<button onclick="openModal('الفنان: جوزيف مالورد ويليام تيرنر\nالسنة: 1839\nالخامة: زيت على قماش\nالمكان الحالي: المعرض الوطني في لندن.\n\nماذا تظهر اللوحة؟\nتُظهر اللوحة سفينة حربية بريطانية قديمة تُسحب بواسطة قارب بخاري صغير عبر نهر التايمز عند غروب الشمس. تبدو السفينة الكبيرة مهيبة لكنها لم تعد تتحرك بقوتها، بينما يسحبها القارب الصغير نحو الميناء حيث سيتم تفكيكها.\n\nما معناها؟\nترمز اللوحة إلى نهاية عصر السفن الشراعية وبداية عصر الآلات البخارية والتطور الصناعي. تمثل السفينة القديمة الماضي المجيد، بينما يمثل القارب البخاري التغيير والمستقبل، لذلك تُفهم اللوحة كرمز لمرور الزمن وتحول العالم من عصر إلى آخر.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+<div class="art human">
+<img src="image/twoo.jpg">
+<div class="info">
+<h3>American Gothic</h3>
+<p>الفنان: Grant Wood</p>
+<button onclick="openModal('الفنان: غرانت وود\nالسنة: 1930\nالخامة: زيت على قماش\nالمكان الحالي: معهد الفنون في شيكاغو.\n\nماذا تظهر اللوحة؟\nتُظهر اللوحة رجلًا وامرأة يقفان أمام منزل ريفي بسيط. يمسك الرجل أداة زراعية بينما تقف المرأة بجانبه بنظرة هادئة وجادة. أسلوب الرسم دقيق جدًا ويبرز تفاصيل الوجوه والملابس والخلفية.\n\nما معناها؟\nتعكس اللوحة الحياة الريفية التقليدية في الولايات المتحدة في تلك الفترة. يفسرها البعض على أنها تمثل العمل الجاد والقيم المحافظة التي تميز المجتمع الريفي، كما أصبحت رمزًا مشهورًا للثقافة الأمريكية التقليدية.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+<div class="art nature">
+<img src="image/b.jpg">
+<div class="info">
+<h3>Impression, Sunrise</h3>
+<p>الفنان: Claude Monet</p>
+<button onclick="openModal('الفنان: كلود مونيه\nالسنة: 1872\nالخامة: زيت على قماش\nالمكان الحالي: متحف مارموتان مونيه في باريس.\n\nماذا تظهر اللوحة؟\nتُظهر اللوحة منظرًا لميناء عند شروق الشمس حيث تظهر القوارب الصغيرة وهي تطفو فوق الماء بهدوء، بينما ينعكس ضوء الشمس البرتقالي على سطح البحر. الخلفية تبدو ضبابية قليلًا وتظهر فيها ملامح السفن والميناء.\n\nما معناها؟\nتركز اللوحة على تأثير الضوء واللحظة العابرة في الطبيعة أكثر من التفاصيل الدقيقة. لذلك تُعد من أهم أعمال المدرسة الانطباعية التي تهتم بإظهار الانطباع البصري والمشاعر التي يخلقها الضوء في المشهد الطبيعي.')">
+قصة اللوحة
+</button>
+</div>
+</div>
+</section>
+
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">&times;</span>
+<p id="modalText"></p>
+</div>
+</div>
+
+<section id="about" class="about">
+<h2>عن معرض أثر</h2>
+<p>
+معرض فني يعرض لوحات تحمل رسائل إنسانية وثقافية بحيث تترك أثرًا في ذاكرة المشاهد.
+</p>
+</section>
+
+<footer>
+© 2026 معرض أثر الفني — جميع الحقوق محفوظة
+</footer>
+
+<script>
+
+function openModal(text){
+document.getElementById("modal").style.display="block";
+document.getElementById("modalText").innerText=text;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+function filterSelection(category){
+let items=document.getElementsByClassName("art");
+
+for(let i=0;i<items.length;i++){
+
+if(category=="all"){
+items[i].style.display="block";
+}
+
+else if(items[i].classList.contains(category)){
+items[i].style.display="block";
+}
+
+else{
+items[i].style.display="none";
+}
+
+}
+}
+
+</script>
+
+</body>
+</html>
